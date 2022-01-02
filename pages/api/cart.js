@@ -6,9 +6,9 @@ const CartDispatchContext = createContext()
 const reducer = (state, action) => {
     switch(action.type) {
         case "ADD": 
-            const items = [...state, action.item]
-            // localStorage.setItem('laughs', JSON.stringify(items))
-            return [...state, action.item];
+            const items = [...state, action.tea]
+            localStorage.setItem('cart', JSON.stringify(items))
+            return [...state, action.tea];
         case "REMOVE":
             const newArr = [...state];
             newArr.splice(action.index, 1);
@@ -38,4 +38,3 @@ export const CartProvider = ({ children }) => {
 
 export const useCart = () => useContext(CartStateContext)
 export const useDispatchCart = () => useContext(CartDispatchContext)
-

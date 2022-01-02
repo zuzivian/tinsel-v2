@@ -1,52 +1,33 @@
-import { useState } from "react"
-import { useDispatchCart } from "../../pages/api/cart"
+import Link from "next/link";
+import { useDispatchCart } from "../../pages/api/cart";
 
-export default function ItemCard({ product }) {
-
-    //add to cart   
+export default function ItemCard ({ tea, id, name, price }) {
     const dispatch = useDispatchCart()
 
-    const handleAdd = (item => {
-        console.log(item)
-        dispatch({ type: "ADD", item })
+    const handleAdd = (tea => {
+        dispatch({ type: "ADD", tea })
     })
-
-    //remove from cart
-    // const handleRemove = (item => {
-    //     console.log(item)
-    //     dispatch({ type: "REMOVE", item })
-    // })
-
-    //indiv item counter
-    const [count, setCount] = useState(0)
-
-
-
-    return (
-        <div className="w-1/2 py-2">
-            <div className="border border-b-8 border-green-600 shadow rounded-xl p-10 m-10 text-center">
-                Item name costs item price
-                <div>
-                    <button
-                        onClick={() => handleAdd(product)}
-                        className="bg-green-900 text-white rounded-lg py-2 px-4 shadow-lg mt-4"
-                    >
-                        buy me
-                    </button>
-                    <button
-                        onClick={() => handleAdd(product)}
-                        onClick={() => setCount((count + 1))}
-                        className="border border-1 border-green-700 rounded py-1.5 px-2 ml-4 text-green-700 text-l">
-                        +
-                    </button>
-                    <span className="m-1.5">{count}</span>
-                    <button
-                        onClick={() => setCount((count - 1))}
-                        className="border border-1 border-green-700 rounded py-1.5 px-2 text-green-700 text-l">
-                        -
-                    </button>
+    return(
+            <div className="flex flex-col justify-center border-box bg-slate-200 p-2 drop-shadow-lg hover:drop-shadow-sm">
+                <Link href={`/teas/${id}`}>
+                <div className="border-box border border-zinc-400 bg-zinc-400 p-6 text-center text-sm">
+                image placeholder
                 </div>
+                </Link>
+                <div className="flex flex-row mt-2">
+                    <div className="w-1/2">
+                        <p className="text-sm font-black">{name}</p>
+                        <p className="text-sm font-light font-serif">${price}/100g</p>
+                    </div>
+                    <div className="w-1/2 flex flex-col items-end text-center align-middle">
+                        <button 
+                            onClick={() => handleAdd(tea)}
+                            className="bg-slate-400 hover:bg-slate-600 text-white p-2 rounded-md">
+                            +
+                        </button>
+                    </div>
+                </div>
+
             </div>
-        </div>
     )
 }
