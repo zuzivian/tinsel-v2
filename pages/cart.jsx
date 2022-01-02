@@ -3,7 +3,6 @@ import { useCart, useDispatchCart } from "./api/cart"
 
 
 export const CartItem = ({product, index, handleRemove}) => {
-    console.log(typeof(product.price))
     return(
         <div className="m-8 space-y-4">
             <p>{product.name}</p>
@@ -16,7 +15,7 @@ export const CartItem = ({product, index, handleRemove}) => {
 export default function Cart () {
     const teas = useCart()
     const dispatch = useDispatchCart()
-    const totalPrice = teas.reduce((total, b) => total + b.price, 0)
+    const totalPrice = teas.reduce((total, b) => total + Number(b.price), 0)
     
     const handleRemove = (index) => {
         dispatch({ type: "REMOVE", index });
@@ -25,6 +24,8 @@ export default function Cart () {
     // const handleClearCart = (index) => {
     //     dispatch({ type: "CLEAR_CART", index})
     // }
+
+    // console.log(teas.price)
 
     if (teas.length === 0) {
         return (
