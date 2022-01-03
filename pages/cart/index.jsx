@@ -1,8 +1,9 @@
-import Navbar from "../components/Navbar"
-import { useCart, useDispatchCart } from "./api/cart"
+import Navbar from "../../components/Navbar"
+import { useCart, useDispatchCart } from "../../lib/cart"
 
 
-export const CartItem = ({product, index, handleRemove}) => {
+const CartItem = ({product, index, handleRemove}) => {
+
     return(
         <div className="m-8 space-y-4">
             <p>{product.name}</p>
@@ -11,6 +12,9 @@ export const CartItem = ({product, index, handleRemove}) => {
     )
 }
 
+// async function redirectToCheckout() {
+//     const { data: {id}, } = await fetch
+// }
 
 export default function Cart () {
     const teas = useCart()
@@ -18,14 +22,12 @@ export default function Cart () {
     const totalPrice = teas.reduce((total, b) => total + Number(b.price), 0)
     
     const handleRemove = (index) => {
-        dispatch({ type: "REMOVE", index });
+        dispatch({ type: "REMOVE_FROM_CART", index });
     }
 
-    // const handleClearCart = (index) => {
-    //     dispatch({ type: "CLEAR_CART", index})
-    // }
-
-    // console.log(teas.price)
+    const handleClearCart = () => {
+        dispatch({ type: "CLEAR_CART"})
+    }
 
     if (teas.length === 0) {
         return (
@@ -63,7 +65,12 @@ export default function Cart () {
                     currency: "USD"
                 })}
             </p>
-            {/* <button onClick={handleClearCart}>Clear Cart</button> */}
+            <button
+                onClick={() => handleClearCart()}
+                className="font-mono font-black mt-4 bg-slate-500 p-1 rounded-lg"
+            >
+                Clear Cart
+            </button>
         </div>
     )
 }

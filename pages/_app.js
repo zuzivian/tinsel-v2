@@ -1,5 +1,5 @@
 import 'tailwindcss/tailwind.css'
-import { CartProvider } from "./api/cart"
+import { CartProvider } from "../lib/cart"
 
 function MyApp({ Component, pageProps }) {
   return(

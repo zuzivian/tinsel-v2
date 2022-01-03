@@ -1,12 +1,12 @@
 import Navbar from '../../components/Navbar'
-import { useDispatchCart } from '../api/cart'
+import { useDispatchCart } from '../../lib/cart'
 
 export default function ItemPage ({tea}) {
 
     const dispatch = useDispatchCart()
 
     const handleAdd = (tea => {
-        dispatch({type: "ADD", tea})
+        dispatch({type: "ADD_TO_CART", tea})
     })
     return(
         <div className="m-12">

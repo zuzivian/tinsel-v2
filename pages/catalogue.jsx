@@ -12,7 +12,7 @@ export default function Catalogue({teas}) {
             </div>
             <Navbar />
             <div className="md: container md:mx-auto px-16 max-w-5xl">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {
                         teas.map(tea => {
                             return (
