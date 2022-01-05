@@ -5,7 +5,6 @@ export default function ItemCard ({ tea, id, name, price }) {
     const dispatch = useDispatchCart()
 
     const handleAdd = (tea => {
-        
         dispatch({ type: "ADD_TO_CART", tea })
     })
     return(
