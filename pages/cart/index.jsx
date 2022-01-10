@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import Navbar from "../../components/Navbar"
 import { useCart, useDispatchCart } from "../../lib/cart"
 
@@ -12,12 +13,9 @@ const CartItem = ({product, index, handleRemove}) => {
     )
 }
 
-// async function redirectToCheckout() {
-//     const { data: {id}, } = await fetch
-// }
-
 export default function Cart () {
     const teas = useCart()
+    const router = useRouter()
     const dispatch = useDispatchCart()
     const totalPrice = teas.reduce((total, b) => total + Number(b.price), 0)
     
@@ -28,6 +26,24 @@ export default function Cart () {
     const handleClearCart = () => {
         dispatch({ type: "CLEAR_CART"})
     }
+
+    const handleCheckout = () => {
+        async function sessionUrl () {
+            const formData = new FormData()
+            teas.forEach((tea) => {
+                formData.append("tea_item", JSON.stringify(tea))
+            })
+            const data = new URLSearchParams(formData);
+
+            const res = await fetch("/api/checkout_sessions", {
+                method: 'post',
+                body: data
+            })
+            const sessionData = await res.json()
+            router.push(sessionData.sessionUrl)
+        }
+        sessionUrl(); 
+        }
 
     if (teas.length === 0) {
         return (
@@ -70,6 +86,13 @@ export default function Cart () {
                 className="font-mono font-black mt-4 bg-slate-500 p-1 rounded-lg"
             >
                 Clear Cart
+            </button> 
+            <button
+                onClick={() => handleCheckout()}
+                type="submit"
+                className="font-mono font-black mt-4 ml-2 bg-slate-500 p-1 rounded-lg"
+            >
+                Checkout
             </button>
         </div>
     )
