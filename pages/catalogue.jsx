@@ -1,18 +1,21 @@
-import Navbar from "../components/Navbar"
-import ItemCard from "../components/ItemCard";
+import Navbar from "../components/navbar-normal"
+import CategoryCard from "../components/categoryCard";
+import ItemCard from "../components/itemCard";
 
 export default function Catalogue({teas}) {
 
     return (
-        <div className="m-12">   
-            <div className="flex justify-center">
-                <h1 className="font-serif font-semibold text-4xl text-slate-800">
-                    Catalogue
-                </h1>
-            </div>
+        <div>
             <Navbar />
-            <div className="md: container md:mx-auto px-16 max-w-5xl">
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="mt-32 text-center font-serif font-semibold text-4xl text-slate-700">
+                Tea Categories
+            </div>   
+            <CategoryCard />
+            <div className="mt-24 text-center font-serif font-semibold text-4xl text-slate-700">
+                Tea Collection
+            </div>   
+            <div className="md: container px-32 max-w-7xl mt-8">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
                     {
                         teas.map(tea => {
                             return (
@@ -29,6 +32,7 @@ export default function Catalogue({teas}) {
                     }
                 </div>
             </div>
+            <div className="h-24"></div>
         </div>
     );
 }

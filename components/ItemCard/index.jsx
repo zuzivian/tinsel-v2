@@ -8,21 +8,24 @@ export default function ItemCard ({ tea, id, name, price }) {
         dispatch({ type: "ADD_TO_CART", tea })
     })
     return(
-            <div className="flex flex-col border-box">
+        <div className="flex flex-col border-box drop-shadow-2xl hover:drop-shadow-md">
                 <Link href={`/teas/${id}`}>
-                <button className="border-box border border-zinc-200 bg-zinc-400 p-6 text-center text-sm drop-shadow-md hover:drop-shadow-sm">
-                image placeholder
+                <button className="relative flex items-center justify-center overflow-hidden shadow-xl rounded-2xl">
+                    <img 
+                        className="transition-all duration-500 ease-in-out transform hover:scale-105"
+                        src={`/items/square/${id}.png`}
+                    />
                 </button>
                 </Link>
                 <div className="flex flex-row mt-2 ml-1 mr-1">
                     <div className="w-5/6">
                         <p className="text-sm font-black">{name}</p>
-                        <p className="text-sm font-light font-serif">${price}/100g</p>
+                        <p className="text-sm font-light font-serif">${price}</p>
                     </div>
                     <div className="w-1/6 border-box ml-1 flex flex-col align-middle">
                         <button 
                             onClick={() => handleAdd(tea)}
-                            className="border-box p-1 bg-slate-400 hover:bg-slate-600 text-white rounded-md">
+                            className="border-box p-1 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md">
                             +
                         </button>
                     </div>
@@ -31,3 +34,6 @@ export default function ItemCard ({ tea, id, name, price }) {
             </div>
     )
 }
+
+// catalogue page inspiration: https://cdn.dribbble.com/users/1508879/screenshots/6744918/furniture_e-commerce_dashboard_4x.jpg?compress=1&resize=400x300 
+// tailwind animation guide source: https://daily-dev-tips.com/posts/tailwind-zooming-background-images/ 

@@ -1,0 +1,45 @@
+.heroindex {
+	width: 100%;
+	height: 100vh;
+	background: url("../../public/hero.png") center no-repeat;
+	background-size: cover;
+	position: relative;
+}
+
+/* .heroexplore {
+	width: 100%;
+	height: 100vh;
+	background: url("../../assets/heros/hero-explore.png") center no-repeat;
+	background-size: cover;
+	position: relative;
+}
+
+.herostory {
+	width: 100%;
+	height: 100vh;
+	background: url("../../assets/heros/hero-story.png") center no-repeat;
+	background-size: cover;
+	position: relative;
+} */
+
+.herotext {
+	color: rgba(245, 245, 245, 0.877);
+	position: absolute;
+	z-index: 900;
+	top: 50%;
+	left: 30%;
+	transform: translate(-50%, -50%);
+	font-family: 'Playfair Display', serif;
+	font-size: 6rem;
+	font-style: italic;
+}
+
+.hero::after {
+	content: '';
+	width: inherit;
+	height: inherit;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, .5);
+}

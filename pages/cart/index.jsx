@@ -1,14 +1,32 @@
 import { useRouter } from "next/router"
-import Navbar from "../../components/Navbar"
+import Navbar from "../../components/navbar-normal"
 import { useCart, useDispatchCart } from "../../lib/cart"
 
 
 const CartItem = ({product, index, handleRemove}) => {
 
     return(
-        <div className="m-8 space-y-4">
-            <p>{product.name}</p>
-            <button onClick={() => handleRemove(index)}>Remove from cart</button>
+        <div className="mt-8 ml-2 mb-8">
+            <div className="max-w-lg grid grid-cols-3 border-b-2 p-2 gap-6 relative">
+                <div className="">
+                    <img
+                        className="w-20 transition-all duration-500 ease-in-out transform hover:scale-105"
+                        src={`/items/square/${product.id}.png`}
+                    />
+                </div>
+                <div className="absolute ml-24 inset-y-4">
+                    <p>Item name: {product.name}</p>
+                    <p>Quantity: {product.quantity}</p>
+                </div>
+                <div className="absolute inset-y-4 ml-64">
+                    <button
+                        className="px-4 py-2 bg-emerald-900 text-white rounded-xl"
+                        onClick={() => handleRemove(index)}
+                    >
+                        Remove from cart
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
@@ -48,7 +66,7 @@ export default function Cart () {
     if (teas.length === 0) {
         return (
             <div className="m-12">
-                <div className="flex justify-center">
+                <div className="">
                     <h1 className="font-serif font-semibold text-4xl text-slate-800">
                         Cart
                     </h1>
@@ -59,10 +77,10 @@ export default function Cart () {
         );
     }
     return(
-        <div className="m-12">
-            <div className="flex justify-center">
+        <div className="mt-32 ml-8">
+            <div className="">
                 <h1 className="font-serif font-semibold text-4xl text-slate-800">
-                    Cart
+                    
                 </h1>
             </div>
             <Navbar />
@@ -74,23 +92,23 @@ export default function Cart () {
                     index={index}
                 />
             ))}
-            <p>
+            <div className="mt-12">
                 Total price:{" "}
                 {totalPrice.toLocaleString("en", {
                     style: "currency",
                     currency: "USD"
                 })}
-            </p>
+            </div>
             <button
                 onClick={() => handleClearCart()}
-                className="font-mono font-black mt-4 bg-slate-500 p-1 rounded-lg"
+                className="font-semibold mt-4 bg-emerald-900 text-white p-1 rounded-lg"
             >
                 Clear Cart
             </button> 
             <button
-                onClick={() => handleCheckout()}
+                onClick={() => {handleCheckout(teas)}}
                 type="submit"
-                className="font-mono font-black mt-4 ml-2 bg-slate-500 p-1 rounded-lg"
+                className="font-semibold mt-4 ml-2 bg-emerald-900 text-white p-1 rounded-lg"
             >
                 Checkout
             </button>
